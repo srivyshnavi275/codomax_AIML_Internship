@@ -8,7 +8,7 @@ import os
 os.makedirs("plots", exist_ok=True)
 
 # Load dataset
-file_path = r"C:\Users\my pc\Downloads\student_scores_cleaned.csv"
+file_path ="C:\Users\my pc\Downloads\student_scores.csv"
 df = pd.read_csv(file_path)
 
 print("Dataset loaded successfully!")
