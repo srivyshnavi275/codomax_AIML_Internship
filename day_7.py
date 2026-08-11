@@ -5,7 +5,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 # 1. Load dataset
-df = pd.read_csv("student_scores_cleaned.csv")
+df = pd.read_csv("C:\Users\my pc\Downloads\student_scores.csv")
 
 print("DAY 7 - MACHINE LEARNING BASICS")
 print("=" * 50)
