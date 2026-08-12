@@ -1,0 +1,60 @@
+# Day 10 - Model Evaluation
+import pandas as pd
+import numpy as np
+import joblib
+import json
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+# Load trained model
+model = joblib.load("C:\\Users\\my pc\\Downloads\\linear_regression_model (1).pkl")
+# Load model metadata
+with open("C:\\Users\\my pc\\Downloads\\model_metadata.json") as f:
+    metadata = json.load(f)
+# Load dataset
+df = pd.read_csv("C:\\Users\\my pc\\Downloads\\student_scores.csv")
+# Calculate average score
+score_cols = [
+    'math_score',
+    'physics_score',
+    'chemistry_score',
+    'english_score',
+    'cs_score'
+]
+df['avg_score'] = df[score_cols].mean(axis=1)
+
+# Get the SAME features used during training
+features = metadata['features']
+
+X = df[features]
+y_true = df['avg_score']
+
+# Make predictions
+y_pred = model.predict(X)
+
+# Calculate metrics
+mae = mean_absolute_error(y_true, y_pred)
+mse = mean_squared_error(y_true, y_pred)
+rmse = np.sqrt(mse)
+r2 = r2_score(y_true, y_pred)
+
+# Display results
+print("=" * 50)
+print("DAY 10 - MODEL EVALUATION")
+print("=" * 50)
+
+print("Features:", features)
+print(f"MAE  : {mae:.2f}")
+print(f"MSE  : {mse:.2f}")
+print(f"RMSE : {rmse:.2f}")
+print(f"R²   : {r2:.2f}")
+
+if r2 >= 0.9:
+    print("Performance: Excellent")
+elif r2 >= 0.7:
+    print("Performance: Good")
+elif r2 >= 0.5:
+    print("Performance: Moderate")
+else:
+    print("Performance: Poor")
+
+print("=" * 50)
+print("Model evaluation completed successfully!")
